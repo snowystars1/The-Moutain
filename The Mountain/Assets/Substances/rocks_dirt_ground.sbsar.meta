@@ -1,0 +1,155 @@
+fileFormatVersion: 2
+guid: dfe88250bc353f342a7d96c2cb356a18
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: rocks_dirt_ground/rocks_dirt_ground
+    400000: rocks_dirt_ground/rocks_dirt_ground/Transform
+    2100000: mat.rocks_dirt_ground
+    2100002: mat.rocks_dirt_ground_1
+    2300000: rocks_dirt_ground/rocks_dirt_ground/MeshRenderer
+    2800000: rocks_dirt_ground_Base Color
+    2800002: rocks_dirt_ground_Normal
+    2800004: rocks_dirt_ground_Metallic
+    2800006: rocks_dirt_ground_height
+    2800008: rocks_dirt_ground_ambientOcclusion
+    2800010: rocks_dirt_ground_1_Base Color
+    2800012: rocks_dirt_ground_1_Normal
+    2800014: rocks_dirt_ground_1_Metallic
+    2800016: rocks_dirt_ground_1_height
+    2800018: rocks_dirt_ground_1_ambientOcclusion
+    3300000: rocks_dirt_ground/rocks_dirt_ground/MeshFilter
+    11400000: sbsar
+    11400002: graph0
+    11400004: graph1
+    13500000: rocks_dirt_ground/rocks_dirt_ground/SphereCollider
+    100100000: rocks_dirt_ground
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 232528478, guid: 43a8bbf65be290d44ba52b94476242b9, type: 3}
+  mGraphInstanceData:
+  - graphLabel: rocks_dirt_ground
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://rocks_dirt_ground\" label=\"\" >\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Base Color,Normal,Metallic,height,ambientOcclusion
+    texturePackingList:
+    - outputName: Base Color
+      alphaSource: Base Color
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Roughness
+      alphaSource: Roughness
+    - outputName: Metallic
+      alphaSource: Smoothness
+    - outputName: height
+      alphaSource: height
+    - outputName: ambientOcclusion
+      alphaSource: ambientOcclusion
+    colorSpaceList:
+    - outputName: Base Color
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Roughness
+      bLinear: 1
+    - outputName: Metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    - outputName: ambientOcclusion
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 2100000, guid: dfe88250bc353f342a7d96c2cb356a18, type: 3}
+  - graphLabel: rocks_dirt_ground_1
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://rocks_dirt_ground\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"3276243466\" type=\"8\" value=\"10,10\" />\n
+      \ <presetinput identifier=\"puddles\" uid=\"2953822014\" type=\"0\" value=\"0\"
+      />\n  <presetinput identifier=\"rock\" uid=\"2953832562\" type=\"0\" value=\"0.7\"
+      />\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Base Color,Normal,Metallic,height,ambientOcclusion
+    texturePackingList:
+    - outputName: Base Color
+      alphaSource: Base Color
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Roughness
+      alphaSource: Roughness
+    - outputName: Metallic
+      alphaSource: Smoothness
+    - outputName: height
+      alphaSource: height
+    - outputName: ambientOcclusion
+      alphaSource: ambientOcclusion
+    colorSpaceList:
+    - outputName: Base Color
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Roughness
+      bLinear: 1
+    - outputName: Metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    - outputName: ambientOcclusion
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 1024
+      textureHeight: 1024
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 2100002, guid: dfe88250bc353f342a7d96c2cb356a18, type: 3}

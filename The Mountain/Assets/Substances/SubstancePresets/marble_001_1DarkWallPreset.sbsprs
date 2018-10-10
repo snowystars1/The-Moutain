@@ -1,0 +1,12 @@
+<sbspresets count="1" formatversion="1.1">
+  <sbspreset pkgurl="pkg://marble_001/marble_001" label="" >
+  <presetinput identifier="$outputsize" uid="1337150628" type="8" value="9,9" />
+  <presetinput identifier="Depth" uid="1257111692" type="0" value="0.14" />
+  <presetinput identifier="Emboss" uid="1257114145" type="0" value="0.056" />
+  <presetinput identifier="Light_Angle" uid="1257114297" type="0" value="0.8" />
+  <presetinput identifier="Saturation" uid="1257239818" type="0" value="0.212" />
+  <presetinput identifier="Luminosity" uid="1257239839" type="0" value="0.263" />
+  <presetinput identifier="White_Areas" uid="1251566238" type="0" value="0" />
+  <presetinput identifier="White_Lines" uid="1251565364" type="0" value="0.305" />
+ </sbspreset>
+</sbspresets>

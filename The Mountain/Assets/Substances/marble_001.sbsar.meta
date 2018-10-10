@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: da7812f117a1eec4cb5c2834727a85e3
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: marble_001/marble_001
+    400000: marble_001/marble_001/Transform
+    2100000: mat.marble_001
+    2100002: mat.marble_001_1
+    2100004: mat.marble_001_2
+    2300000: marble_001/marble_001/MeshRenderer
+    2800000: marble_001_Diffuse
+    2800002: marble_001_Normal
+    2800004: marble_001_Height
+    2800006: marble_001_1_Diffuse
+    2800008: marble_001_1_Normal
+    2800010: marble_001_1_Height
+    2800012: marble_001_2_Diffuse
+    2800014: marble_001_2_Normal
+    2800016: marble_001_2_Height
+    3300000: marble_001/marble_001/MeshFilter
+    11400000: sbsar
+    11400002: graph0
+    11400004: graph1
+    11400006: graph2
+    13500000: marble_001/marble_001/SphereCollider
+    100100000: marble_001
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 232528478, guid: 43a8bbf65be290d44ba52b94476242b9, type: 3}
+  mGraphInstanceData:
+  - graphLabel: marble_001
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://marble_001/marble_001\" label=\"\" >\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Diffuse,Normal,Height
+    texturePackingList:
+    - outputName: Diffuse
+      alphaSource: Diffuse
+    - outputName: Specular
+      alphaSource: Specular
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Bump
+      alphaSource: Bump
+    - outputName: Displacement
+      alphaSource: Displacement
+    - outputName: Height
+      alphaSource: Height
+    colorSpaceList:
+    - outputName: Diffuse
+      bLinear: 0
+    - outputName: Specular
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Bump
+      bLinear: 1
+    - outputName: Displacement
+      bLinear: 1
+    - outputName: Height
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 2100000, guid: da7812f117a1eec4cb5c2834727a85e3, type: 3}
+  - graphLabel: marble_001_1
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://marble_001/marble_001\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"1337150628\" type=\"8\" value=\"9,9\" />\n
+      \ <presetinput identifier=\"Depth\" uid=\"1257111692\" type=\"0\" value=\"0.14\"
+      />\n  <presetinput identifier=\"Emboss\" uid=\"1257114145\" type=\"0\" value=\"0.056\"
+      />\n  <presetinput identifier=\"Light_Angle\" uid=\"1257114297\" type=\"0\"
+      value=\"0.8\" />\n  <presetinput identifier=\"Saturation\" uid=\"1257239818\"
+      type=\"0\" value=\"0.212\" />\n  <presetinput identifier=\"Luminosity\" uid=\"1257239839\"
+      type=\"0\" value=\"0.263\" />\n  <presetinput identifier=\"White_Areas\" uid=\"1251566238\"
+      type=\"0\" value=\"0\" />\n  <presetinput identifier=\"White_Lines\" uid=\"1251565364\"
+      type=\"0\" value=\"0.305\" />\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Diffuse,Normal,Height
+    texturePackingList:
+    - outputName: Diffuse
+      alphaSource: Diffuse
+    - outputName: Specular
+      alphaSource: Specular
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Bump
+      alphaSource: Bump
+    - outputName: Displacement
+      alphaSource: Displacement
+    - outputName: Height
+      alphaSource: Height
+    colorSpaceList:
+    - outputName: Diffuse
+      bLinear: 0
+    - outputName: Specular
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Bump
+      bLinear: 1
+    - outputName: Displacement
+      bLinear: 1
+    - outputName: Height
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 2100002, guid: da7812f117a1eec4cb5c2834727a85e3, type: 3}
+  - graphLabel: marble_001_2
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://marble_001/marble_001\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"1337150628\" type=\"8\" value=\"9,9\" />\n
+      \ <presetinput identifier=\"Depth\" uid=\"1257111692\" type=\"0\" value=\"1\"
+      />\n  <presetinput identifier=\"Emboss\" uid=\"1257114145\" type=\"0\" value=\"0.056\"
+      />\n  <presetinput identifier=\"Light_Angle\" uid=\"1257114297\" type=\"0\"
+      value=\"0.8\" />\n  <presetinput identifier=\"Saturation\" uid=\"1257239818\"
+      type=\"0\" value=\"0.212\" />\n  <presetinput identifier=\"Luminosity\" uid=\"1257239839\"
+      type=\"0\" value=\"0.263\" />\n  <presetinput identifier=\"White_Areas\" uid=\"1251566238\"
+      type=\"0\" value=\"0\" />\n  <presetinput identifier=\"White_Lines\" uid=\"1251565364\"
+      type=\"0\" value=\"0.305\" />\n  <presetinput identifier=\"Marble_Color\" uid=\"1251567515\"
+      type=\"2\" value=\"0.716981,0.716981,0.716981\" />\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Diffuse,Normal,Height
+    texturePackingList:
+    - outputName: Diffuse
+      alphaSource: Diffuse
+    - outputName: Specular
+      alphaSource: Specular
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Bump
+      alphaSource: Bump
+    - outputName: Displacement
+      alphaSource: Displacement
+    - outputName: Height
+      alphaSource: Height
+    colorSpaceList:
+    - outputName: Diffuse
+      bLinear: 0
+    - outputName: Specular
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Bump
+      bLinear: 1
+    - outputName: Displacement
+      bLinear: 1
+    - outputName: Height
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 2100004, guid: da7812f117a1eec4cb5c2834727a85e3, type: 3}
