@@ -49,7 +49,7 @@ public class BackState : State<AI>
             boss.stateMachine.ChangeState(LeftState.Instance);
         }
 
-        if (AI.randomChoice != -1f)
+        if (AI.randomChoice != -1f && EnemyHealth.enemyHealth > 0)
         {
             if (AI.randomChoice >= 0f && AI.randomChoice <= .45f)
             {

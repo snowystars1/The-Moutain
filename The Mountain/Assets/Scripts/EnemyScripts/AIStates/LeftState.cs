@@ -10,7 +10,7 @@ public class LeftState : State<AI>
     private bool isSlapping = false;
     private bool slapStep3 = false;
     private bool slapStep4 = false;
-    private float timer =0f;
+    private float timer = 0f;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 slapUpPosition = new Vector3(-38f, 13f, -45f);
@@ -68,7 +68,7 @@ public class LeftState : State<AI>
 
     public override void UpdateState(AI boss)
     {
-        if (AI.switchState==1)
+        if (AI.switchState == 1)
         {
             boss.stateMachine.ChangeState(RightState.Instance);
         }
@@ -79,32 +79,32 @@ public class LeftState : State<AI>
         }
 
         //STATES BASED ON RANDOM NUMBER
-        if (AI.randomChoice!=-1f)
+        if (AI.randomChoice != -1f && EnemyHealth.enemyHealth > 0)
         {
-            if (AI.randomChoice >= 0f && AI.randomChoice <= .3f)
+            if (AI.randomChoice >= 0f && AI.randomChoice <= .3f)//30% chance to swipe
             {
                 boss.sBLeftAnim.CrossFadeInFixedTime(HashTable.slimeBossLArmSwipe, .3f);
             }
-            if (AI.randomChoice > .3f && AI.randomChoice <= .6f)
+            if (AI.randomChoice > .3f && AI.randomChoice <= .6f)//30% chance to slap
             {
                 if (!isSlapping)
                 {
                     Slap(boss);
                 }
             }
-            if (AI.randomChoice > .6f && AI.randomChoice <= .65f)
+            if (AI.randomChoice > .6f && AI.randomChoice <= .7f)//10% chance to heal
             {
-
+                EnemyHealth.heal = false;
                 boss.sBRightAnim.CrossFadeInFixedTime(HashTable.slimeBossRArmVulnerable, .5f);
                 boss.sBLeftAnim.CrossFadeInFixedTime(HashTable.slimeBossLArmVulnerable, .5f);
             }
-            if (AI.randomChoice > .65f && AI.randomChoice <= .9f)
+            if (AI.randomChoice > .7f && AI.randomChoice <= .9f)//25% chance to rumble
             {
                 boss.sBRightAnim.CrossFadeInFixedTime(HashTable.slimeBossRArmRumble, .4f);
                 boss.sBLeftAnim.CrossFadeInFixedTime(HashTable.slimeBossLArmRumble, .4f);
                 boss.sBAnim.CrossFadeInFixedTime(HashTable.slimeBossRumbleState, .4f);
             }
-            if (AI.randomChoice > .9f && AI.randomChoice <= 1f)
+            if (AI.randomChoice > .9f && AI.randomChoice <= 1f)//10% chance to suck/blow
             {
                 boss.sBLeftAnim.CrossFadeInFixedTime(HashTable.slimeBossLArmSuck, .3f);
                 boss.sBRightAnim.CrossFadeInFixedTime(HashTable.slimeBossRArmSuck, .3f);

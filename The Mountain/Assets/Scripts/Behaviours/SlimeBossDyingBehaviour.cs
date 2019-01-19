@@ -11,13 +11,14 @@ public class SlimeBossDyingBehaviour : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+    //}
 
 	 //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-            Debug.Log("asdfa");
-            //Destroy(animator.gameObject);//Add a particle effect here if we want
+        if (EnemyHealth.enemyHealth < 0)//This means he is exiting the "dying state"
+        {
+            Destroy(animator.gameObject);//So kill it
+        }
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

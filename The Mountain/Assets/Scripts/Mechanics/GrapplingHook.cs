@@ -18,7 +18,8 @@ public class GrapplingHook : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        grapplingHookRb.isKinematic = true;//The hook stops moving when it collides with something
+        grapplingHookRb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
         GameManagerScript.instance.hookController.Grapple();
+
     }
 }

@@ -4,4 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 608949a46a519d54ca66a4f9bbef77ad
+  - enabled: 1
+    path: Assets/Scenes/Arena-1-SlimeBoss.unity
+    guid: 4983bd392b6481b49bdd32f9be49233d
+  m_configObjects: {}

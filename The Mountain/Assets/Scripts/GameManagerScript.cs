@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour {
 
     public static GameManagerScript instance = null;
     public GrapplingHookCharacterController hookController;
+    public PlayerPhysics playerPhys;
     public InputManager inputManager;
     public GrapplingHook grapplingHook;
 
@@ -15,6 +17,7 @@ public class GameManagerScript : MonoBehaviour {
 		if(instance == null)//This will ensure that there is only a single instance of this class in the game at all times.
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -27,8 +30,9 @@ public class GameManagerScript : MonoBehaviour {
         DontDestroyOnLoad(gameObject); //This object will persist through scenes
 
 	}
-	
-	void Update () {
-		
-	}
+
+    public void PlayButton()
+    {
+        SceneManager.LoadScene("Arena-1-SlimeBoss", LoadSceneMode.Single);
+    }
 }

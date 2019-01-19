@@ -12,7 +12,7 @@ public class SlimeBossLArmAnimationEvents : MonoBehaviour {
 
     public void GenerateNumber2()
     {
-        if (AI.switchState != 2)
+        if (AI.switchState != 2)//If we are not in the right state, then dont calculate the random choice here.
         {
             return;
         }

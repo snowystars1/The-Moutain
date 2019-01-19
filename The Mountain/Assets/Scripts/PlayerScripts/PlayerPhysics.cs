@@ -74,13 +74,11 @@ public class PlayerPhysics : MonoBehaviour {
 
         if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.jumpState)//Motion while in the air.
         {
-            //Debug.Log(InputManager.newMove.z);
             if(InputManager.newMove.z > .25f || InputManager.newMove.z < -.25f)
-                playerRb.AddForce(transform.forward.normalized * 9f * InputManager.newMove.z, ForceMode.Force);
+                playerRb.AddForce(transform.forward.normalized * 7f * InputManager.newMove.z, ForceMode.Force);
 
             if ((playerRb.velocity.x > 4f || playerRb.velocity.x < -4f) || (playerRb.velocity.z > 4f || playerRb.velocity.z < -4f))
             {
-                //Debug.Log(playerRb.velocity);
                 playerRb.AddForce(new Vector3(playerRb.velocity.x,0f,playerRb.velocity.z) * -4f, ForceMode.Force);
             }
 
@@ -98,7 +96,7 @@ public class PlayerPhysics : MonoBehaviour {
 
     public void ApplyForceDown()
     {
-        //playerRb.AddForce(new Vector3(0f, -1.5f, 0f), ForceMode.Impulse);
+        playerRb.AddForce(new Vector3(0f, -1.5f, 0f), ForceMode.Impulse);
     }
 
     public void RunToJumpForceSmoothing()

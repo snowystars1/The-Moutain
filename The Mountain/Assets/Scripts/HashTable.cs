@@ -30,6 +30,10 @@ public class HashTable : MonoBehaviour {
     public static int turnParam = Animator.StringToHash("Turn");
     public static int dodgeParam = Animator.StringToHash("DodgeRoll");
 
+    public static int enemyHealthParam = Animator.StringToHash("EnemyHealth");
+    public static int enemyHealthRParam = Animator.StringToHash("EnemyHealthR");
+    public static int enemyHealthLParam = Animator.StringToHash("EnemyHealthL");
+
     //First set of ground combo states
     public static int swordStab2State = Animator.StringToHash("Battle_SwordStab2");
     public static int swordSpin2State = Animator.StringToHash("Battle_SwordSpinFinisher2");

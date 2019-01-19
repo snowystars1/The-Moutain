@@ -30,7 +30,7 @@ public class MouseOrbitImproved : MonoBehaviour
 
     //CAMERA LERP AND SLERP CONTROLS
     private Vector3 velocity = Vector3.zero;
-    private Vector3 heightOffset = new Vector3(0f, 1f, 0f);
+    //private Vector3 heightOffset = new Vector3(0f, 1f, 0f);
 
 
     //TARGET MODE VARIABLES

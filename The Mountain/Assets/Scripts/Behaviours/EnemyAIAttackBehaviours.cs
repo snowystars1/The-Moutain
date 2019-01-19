@@ -23,7 +23,7 @@ public class EnemyAIAttackBehaviours : StateMachineBehaviour {
         {
             boss = GameObject.FindGameObjectWithTag("SlimeBoss").GetComponent<AI>();
         }
-        catch (NullReferenceException e)
+        catch (NullReferenceException)
         {
             return;
         }
