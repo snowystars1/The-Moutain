@@ -33,7 +33,6 @@ public class InputManager : MonoBehaviour
     public float airAttackMovementSpeed = 3f;
     public float CameraMoveDistanceOnDPad = 1f;
     public int RevTimeMoveSpeed = 1;
-    private float turn;
 
     //private float startTime;
     private ParticleSystem clockParticles;
@@ -71,6 +70,20 @@ public class InputManager : MonoBehaviour
 
     public GameObject GrapplingHookPicture;
     public GameObject PocketWatchPicture;
+
+
+
+    void OnEnable()
+    {
+        EventManager.Movement += LeftStick;
+        EventManager.MoveCancel += LeftStickStop;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Movement -= LeftStick;
+        EventManager.MoveCancel += LeftStickStop;
+    }
 
     void Start()
     {
@@ -128,51 +141,7 @@ public class InputManager : MonoBehaviour
         playerAnim.SetFloat(HashTable.controllerXParam, controllerInputX);
         playerAnim.SetFloat(HashTable.controllerYParam, controllerInputY);
 
-        //MOVE AROUND
-
         //ResetBattleTimer();//Reset the battle timer to 0 if there is an input
-        //if (!Targeting.targetMode)
-        //{
-        camForward = Vector3.Scale(CamTrans.forward, new Vector3(1, 0, 1)).normalized;
-        //}
-        newMove = controllerInputY * camForward + controllerInputX * CamTrans.right; //Adding the Camera forward vector and the camera right vector gives up the 3rd side of the triangle created by those two vectors. This is the direction the character will move
-        if (newMove.magnitude > 1f)//To control magnitude
-            newMove.Normalize();
-        newMove = transform.InverseTransformDirection(newMove); //Get the direction local to this transform
-        newMove = Vector3.ProjectOnPlane(newMove, PlayerPhysics.groundNormal);//For uneven surfaces
-        turn = Mathf.Atan2(newMove.x, newMove.z); //Find the angle to which we want to turn
-
-        if ((controllerInputX > .1f || controllerInputX < -.1f) || (controllerInputY > .1f || controllerInputY < -.1f))
-        {//Left Stick
-            if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != HashTable.glideState)//Rotation will be handled differently while gliding
-            {
-                if (turn < 1.7f && turn > -1.7f)
-                {
-                    float turnSpeed = Mathf.Lerp(180f, 360f, newMove.z);
-                    transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
-                }
-                else//He's rotating REALLY QUICKLY
-                {
-                    //This is to cap the speed at which he can rotate.
-                    if (turn > 2f)
-                        turn = 2f;
-                    if (turn < -2f)
-                        turn = -2f;
-
-                    transform.Rotate(0, turn * 500f * Time.deltaTime, 0);//This will cap the rotation speed to 500f when he is spinning the stick very quickly
-                }
-            }
-
-            playerAnim.SetFloat("Turn", turn, .1f, Time.deltaTime);
-            playerAnim.SetFloat("Forward", newMove.z, .1f, Time.deltaTime);
-
-        }
-        else
-        {
-
-            playerAnim.SetFloat("Turn", 0f);
-            playerAnim.SetFloat("Forward", 0f);
-        }
 
         //JUMP
         if (Input.GetKeyDown("joystick button 0"))//User presses the jump input, they are in one of the motion states, and they are on the ground
@@ -203,15 +172,15 @@ public class InputManager : MonoBehaviour
 
 
         //GLIDE
-        //if (Input.GetKeyDown("joystick button 0") && !playerAnim.GetBool(HashTable.onGroundParam) && !playerAnim.GetBool(HashTable.glidingParam))
-        //{//The 'A' Button
-        //    playerAnim.CrossFadeInFixedTime(HashTable.glideState, .5f);
-        //    playerAnim.SetBool(HashTable.glidingParam, true);
-        //}
-        //if (((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState) && Input.GetKeyDown("joystick button 0")) || playerAnim.GetBool(HashTable.onGroundParam))
-        //{
-        //    playerAnim.SetBool(HashTable.glidingParam, false);
-        //}
+        if (Input.GetKeyDown("joystick button 0") && !playerAnim.GetBool(HashTable.onGroundParam) && !playerAnim.GetBool(HashTable.glidingParam))
+        {//The 'A' Button
+            playerAnim.CrossFadeInFixedTime(HashTable.glideState, .5f);
+            playerAnim.SetBool(HashTable.glidingParam, true);
+        }
+        if (((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState) && Input.GetKeyDown("joystick button 0")) || playerAnim.GetBool(HashTable.onGroundParam))
+        {
+            playerAnim.SetBool(HashTable.glidingParam, false);
+        }
 
         //GROUND ATTACKS
         if (Input.GetKeyDown("joystick button 2") && playerAnim.GetBool(HashTable.onGroundParam))//This is for initiating a ground combo
@@ -330,56 +299,6 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        //Reverse Time
-        //if(Input.GetKey("joystick button 3"))
-        //{
-        //    playerAnim.enabled = false;
-        //    clockParticles.Play(true);
-        //    playerModel.enabled = false;
-        //    playerClothes.enabled = false;
-        //    swordModel.enabled = false;
-        //    gliderModel.enabled = false;
-        //    gauntletModel.enabled = false;
-        //    scarfModel.enabled = false;
-        //    Vector3 toReversePos = PlayerPhysics.posData.reversePositions[(PlayerPhysics.posData.count + 1) % 13] - transform.position;
-        //    playerRb.velocity = toReversePos * RevTimeMoveSpeed;
-        //}
-        //if(Input.GetKeyUp("joystick button 3"))
-        //{
-        //    playerAnim.enabled = true;
-        //    playerModel.enabled = true;
-        //    playerClothes.enabled = true;
-        //    swordModel.enabled = true;
-        //    gliderModel.enabled = true;
-        //    gauntletModel.enabled = true;
-        //    scarfModel.enabled = true;
-        //    //particles.Pause(true);
-        //    clockParticles.Stop();
-        //    //particles.Clear(true);
-        //}
-
-        //GRAPPLING HOOK
-        //if (Input.GetKeyDown("joystick button 4") && !playerAnim.GetBool(HashTable.grapplingParam))
-        //{//The LeftBumper button
-        //    //DO SOME ANIMATION CALL
-        //    playerAnim.SetBool(HashTable.grapplingParam, true);//WE HAVE TWO ACTIVATE BOOLEANS, ONE CALLED GrapplingHookCharacterController.GrapplingHookMode which activates when the grapple hits a target, and another called HashTable.grapplingParam which activates when you press the grapple button
-        //    GameManagerScript.instance.hookController.FireGrappleHook();
-
-        //}
-        //else
-        //{
-        //    if (Input.GetKeyDown("joystick button 4") && playerAnim.GetBool(HashTable.grapplingParam))//This is to remove the grappling hook
-        //    {
-        //        GameManagerScript.instance.hookController.DestroyGrappleHook();//This is done to reduce having multiple instances of the same script in a scene.
-        //        playerAnim.SetBool(HashTable.grapplingParam, false);
-        //        GrapplingHookCharacterController.GrapplingHookMode = false;//This will already be false if the hook hasn't hit anything, it the hook has made contact, it will will be true, therefore this line will actually do something.
-        //        if (playerAnim.GetBool(HashTable.onGroundParam))
-        //        {
-        //            playerAnim.applyRootMotion = true;//This is turned on here and in IdleBehaviour, when the character is flying through the air or being controlled by forces other than the animator, this should be off.
-        //        }
-        //    }
-        //}
-
         switch (currentItem)
         {
             //GRAPPLING HOOK
@@ -437,6 +356,43 @@ public class InputManager : MonoBehaviour
         }
 
 
+    }
+
+
+    void LeftStick()
+    {
+            //This block of code gives us direction of movement and turn parameter for the animator fields.
+            camForward = Vector3.Scale(CamTrans.forward, new Vector3(1f, 0, 1f)).normalized;
+
+            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), camForward, Color.blue, 3f);
+            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), CamTrans.right, Color.green, 3f);
+
+            newMove = (controllerInputY * camForward) + (controllerInputX * CamTrans.right); //Adding the Camera forward vector and the camera right vector gives up the 3rd side of the triangle created by those two vectors. This is the direction the character will move
+            if (newMove.magnitude > 1f)//To control magnitude
+                newMove.Normalize();
+            newMove = transform.TransformDirection(newMove);
+            newMove = transform.InverseTransformDirection(newMove); //Get the direction local to this transform
+            //newMove = Vector3.ProjectOnPlane(newMove, PlayerPhysics.groundNormal);//For uneven surfaces
+
+
+            if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != HashTable.glideState)//Rotation will be handled differently while gliding
+            {
+
+
+                float speed = 10 * Time.deltaTime;
+
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, newMove, speed, 0f);
+                transform.rotation = Quaternion.LookRotation(newDir);
+
+            }
+
+            playerAnim.SetFloat("Forward", Mathf.Clamp(Mathf.Abs(controllerInputX) + Mathf.Abs(controllerInputY), 0f, 1f), .1f, Time.deltaTime);
+    }
+
+    void LeftStickStop()
+    {
+        playerAnim.SetFloat("Turn", 0f);
+        playerAnim.SetFloat("Forward", 0f);
     }
 
     void AddBattleTimer()
