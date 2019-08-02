@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     bool isAxisDown = false;
 
     Animator playerAnim;
+    Animator gliderAnim;
 
     public GameObject playerSword;
     private CapsuleCollider swordCollider;
@@ -77,12 +78,22 @@ public class InputManager : MonoBehaviour
     {
         EventManager.Movement += LeftStick;
         EventManager.MoveCancel += LeftStickStop;
+        EventManager.Jump += Jump;
+        EventManager.Glide += Glide;
+        EventManager.GlideCancel += GlideCancel;
+        EventManager.DodgeRoll += DodgeRoll;
+        EventManager.GroundAttacks += GroundAttack;
     }
 
     void OnDisable()
     {
         EventManager.Movement -= LeftStick;
-        EventManager.MoveCancel += LeftStickStop;
+        EventManager.MoveCancel -= LeftStickStop;
+        EventManager.Jump -= Jump;
+        EventManager.Glide -= Glide;
+        EventManager.GlideCancel -= GlideCancel;
+        EventManager.DodgeRoll -= DodgeRoll;
+        EventManager.GroundAttacks += GroundAttack;
     }
 
     void Start()
@@ -134,69 +145,6 @@ public class InputManager : MonoBehaviour
     {
 
         playerAnim.SetFloat(HashTable.jumpBlendParam, playerRb.velocity.y);
-
-        controllerInputY = Input.GetAxis("Vertical");
-        controllerInputX = Input.GetAxis("Horizontal");
-
-        playerAnim.SetFloat(HashTable.controllerXParam, controllerInputX);
-        playerAnim.SetFloat(HashTable.controllerYParam, controllerInputY);
-
-        //ResetBattleTimer();//Reset the battle timer to 0 if there is an input
-
-        //JUMP
-        if (Input.GetKeyDown("joystick button 0"))//User presses the jump input, they are in one of the motion states, and they are on the ground
-        {//The 'A' Button
-
-            if ((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.motionState || (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.battleMotionState)) && playerAnim.GetBool(HashTable.onGroundParam))//This ensures the character is well into one of the two motion states when he tries to jump
-            {
-                ResetBattleTimer();
-                playerAnim.CrossFadeInFixedTime(HashTable.jumpState, .25f);//Forces for the jump is applied in animation event for "Jump_2Initial"
-                                                                           //playerHeight = this.gameObject.transform.position.y;//World Space positional y value
-                playerAnim.applyRootMotion = false;
-                GameManagerScript.instance.playerPhys.ApplyJumpForce();
-                //playerPhys.ApplyJumpForce();
-                //playerPhys.RunToJumpForceSmoothing();
-            }
-        }
-        //if(Input.GetKeyUp("joystick button 0"))
-        //{
-        //    playerPhys.ApplyForceDown();
-        //}
-
-        //DODGE ROLL
-        if (Input.GetKeyDown("joystick button 1") && ((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.motionState) || (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.battleMotionState)) && (playerAnim.GetAnimatorTransitionInfo(0).fullPathHash != HashTable.motionToDodge))
-        {//The 'B' button
-            //playerAnim.CrossFadeInFixedTime(HashTable.dodgeRollState, .3f);
-            playerAnim.SetTrigger(HashTable.dodgeParam);
-        }
-
-
-        //GLIDE
-        if (Input.GetKeyDown("joystick button 0") && !playerAnim.GetBool(HashTable.onGroundParam) && !playerAnim.GetBool(HashTable.glidingParam))
-        {//The 'A' Button
-            playerAnim.CrossFadeInFixedTime(HashTable.glideState, .5f);
-            playerAnim.SetBool(HashTable.glidingParam, true);
-        }
-        if (((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState) && Input.GetKeyDown("joystick button 0")) || playerAnim.GetBool(HashTable.onGroundParam))
-        {
-            playerAnim.SetBool(HashTable.glidingParam, false);
-        }
-
-        //GROUND ATTACKS
-        if (Input.GetKeyDown("joystick button 2") && playerAnim.GetBool(HashTable.onGroundParam))//This is for initiating a ground combo
-        {//The 'X' Button
-            ResetBattleTimer();
-            //This is set to true here because the player must always be able to press x and activate the combo parameter
-            playerAnim.SetBool(HashTable.ComboParam, true);//This is set to false in the comboBeahviour script in the function OnStateEnter().
-
-            if ((playerAnim.GetInteger(HashTable.ComboCountParam) == 0)
-                && ((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.battleMotionState) || (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.motionState)))//One can only start a combo if they are in one of the motion states and not already in an attack state.
-            {
-                swordCollider.enabled = true;
-                playerAnim.SetInteger(HashTable.ComboCountParam, 1);
-                playerAnim.CrossFade(HashTable.swordSwing2State, .25f);
-            }
-        }
 
         //AIR ATTACKS
         if (!playerAnim.GetBool(HashTable.onGroundParam) && (Input.GetMouseButtonDown(1) || Input.GetKeyDown("joystick button 2")))//This is for initiating an air combo
@@ -359,40 +307,96 @@ public class InputManager : MonoBehaviour
     }
 
 
-    void LeftStick()
+    void LeftStick(float controllerInputX, float controllerInputY)
     {
-            //This block of code gives us direction of movement and turn parameter for the animator fields.
-            camForward = Vector3.Scale(CamTrans.forward, new Vector3(1f, 0, 1f)).normalized;
+        //This block of code gives us direction of movement and turn parameter for the animator fields.
+        camForward = Vector3.Scale(CamTrans.forward, new Vector3(1f, 0, 1f)).normalized;
 
-            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), camForward, Color.blue, 3f);
-            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), CamTrans.right, Color.green, 3f);
+        //Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), camForward, Color.blue, 3f);
+        //Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), CamTrans.right, Color.green, 3f);
 
-            newMove = (controllerInputY * camForward) + (controllerInputX * CamTrans.right); //Adding the Camera forward vector and the camera right vector gives up the 3rd side of the triangle created by those two vectors. This is the direction the character will move
-            if (newMove.magnitude > 1f)//To control magnitude
-                newMove.Normalize();
-            newMove = transform.TransformDirection(newMove);
-            newMove = transform.InverseTransformDirection(newMove); //Get the direction local to this transform
-            //newMove = Vector3.ProjectOnPlane(newMove, PlayerPhysics.groundNormal);//For uneven surfaces
-
-
-            if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != HashTable.glideState)//Rotation will be handled differently while gliding
-            {
+        //Adding the Camera forward vector and the camera right vector gives up the 3rd side of the triangle created by those two vectors. This is the direction the character will move
+        newMove = (controllerInputY * camForward) + (controllerInputX * CamTrans.right);
+        if (newMove.magnitude > 1f)//To control magnitude
+            newMove.Normalize();
+        newMove = transform.TransformDirection(newMove);
+        newMove = transform.InverseTransformDirection(newMove); //Get the direction local to this transform
+        //newMove = Vector3.ProjectOnPlane(newMove, PlayerPhysics.groundNormal);//For uneven surfaces
 
 
-                float speed = 10 * Time.deltaTime;
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash != HashTable.glideState)//Rotation will be handled differently while gliding
+        {
 
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, newMove, speed, 0f);
-                transform.rotation = Quaternion.LookRotation(newDir);
+            float speed = 10 * Time.deltaTime;
 
-            }
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, newMove, speed, 0f);
+            transform.rotation = Quaternion.LookRotation(newDir);
 
-            playerAnim.SetFloat("Forward", Mathf.Clamp(Mathf.Abs(controllerInputX) + Mathf.Abs(controllerInputY), 0f, 1f), .1f, Time.deltaTime);
+        }
+
+        playerAnim.SetFloat("Forward", Mathf.Clamp(Mathf.Abs(controllerInputX) + Mathf.Abs(controllerInputY), 0f, 1f), .1f, Time.deltaTime);
+
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.jumpState)//Motion while in the air.
+        {
+            GameManagerScript.instance.playerPhys.MotionInAir(newMove);
+        }
+
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState)
+        {
+            GameManagerScript.instance.playerPhys.GliderMotion(controllerInputX, controllerInputY);
+        }
     }
 
     void LeftStickStop()
     {
         playerAnim.SetFloat("Turn", 0f);
         playerAnim.SetFloat("Forward", 0f);
+    }
+
+    void Jump()
+    {
+        if ((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.motionState || (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.battleMotionState)) && playerAnim.GetBool(HashTable.onGroundParam))//This ensures the character is well into one of the two motion states when he tries to jump
+        {
+            ResetBattleTimer();
+            playerAnim.CrossFadeInFixedTime(HashTable.jumpState, .25f);//Forces for the jump is applied in animation event for "Jump_2Initial"
+            playerAnim.applyRootMotion = false;
+            GameManagerScript.instance.playerPhys.ApplyJumpForce();
+        }
+    }
+
+    void Glide()
+    {
+        playerAnim.CrossFadeInFixedTime(HashTable.glideState, .5f);
+        playerAnim.SetBool(HashTable.glidingParam, true);
+    }
+
+    void GlideCancel()
+    {
+        GameManagerScript.instance.playerPhys.GliderCancel();
+        playerAnim.SetBool(HashTable.glidingParam, false);
+    }
+
+    void DodgeRoll()
+    {
+        playerAnim.SetTrigger(HashTable.dodgeParam);
+    }
+
+
+
+
+    void GroundAttack()
+    {
+        ResetBattleTimer();
+        //This is set to true here because the player must always be able to press x and activate the combo parameter
+        playerAnim.SetBool(HashTable.ComboParam, true);//This is set to false in the comboBeahviour script in the function OnStateEnter().
+
+        if ((playerAnim.GetInteger(HashTable.ComboCountParam) == 0)
+            && ((playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.battleMotionState) || (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.motionState)))//One can only start a combo if they are in one of the motion states and not already in an attack state.
+        {
+            swordCollider.enabled = true;
+            playerAnim.SetInteger(HashTable.ComboCountParam, 1);
+            playerAnim.CrossFade(HashTable.swordSwing2State, .25f);
+        }
     }
 
     void AddBattleTimer()

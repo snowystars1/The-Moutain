@@ -1,81 +1,215 @@
 fileFormatVersion: 2
 guid: ed93e6b6e8a31654390849c947e9445e
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Arm.L
-    100002: Arm.R
-    100004: Arm_IK.L
-    100006: Arm_IK.R
-    100008: Armature
-    100010: Chest
-    100012: Control
-    100014: Cube
-    100016: Elbow.L
-    100018: Elbow.R
-    100020: Foot.L
-    100022: Foot.R
-    100024: Foot_IK.L
-    100026: Foot_IK.R
-    100028: Hand.L
-    100030: Hand.R
-    100032: Head
-    100034: Knee.L
-    100036: Knee.R
-    100038: Leg.L
-    100040: Leg.R
-    100042: Neck
-    100044: //RootNode
-    100046: Stomach
-    100048: UpperArm.L
-    100050: UpperArm.R
-    100052: UpperLeg.L
-    100054: UpperLeg.R
-    400000: Arm.L
-    400002: Arm.R
-    400004: Arm_IK.L
-    400006: Arm_IK.R
-    400008: Armature
-    400010: Chest
-    400012: Control
-    400014: Cube
-    400016: Elbow.L
-    400018: Elbow.R
-    400020: Foot.L
-    400022: Foot.R
-    400024: Foot_IK.L
-    400026: Foot_IK.R
-    400028: Hand.L
-    400030: Hand.R
-    400032: Head
-    400034: Knee.L
-    400036: Knee.R
-    400038: Leg.L
-    400040: Leg.R
-    400042: Neck
-    400044: //RootNode
-    400046: Stomach
-    400048: UpperArm.L
-    400050: UpperArm.R
-    400052: UpperLeg.L
-    400054: UpperLeg.R
-    2100000: Material
-    4300000: Cube
-    7400000: Idle_Base
-    7400002: Run_2
-    7400004: Idle_BackStretch
-    7400006: Idle_HeadScratch
-    7400008: Run_2Left
-    7400010: Run_2Back
-    7400012: Run_2Right
-    9500000: //RootNode
-    13700000: Cube
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Arm.L
+  - first:
+      1: 100002
+    second: Arm.R
+  - first:
+      1: 100004
+    second: Arm_IK.L
+  - first:
+      1: 100006
+    second: Arm_IK.R
+  - first:
+      1: 100008
+    second: Armature
+  - first:
+      1: 100010
+    second: Chest
+  - first:
+      1: 100012
+    second: Control
+  - first:
+      1: 100014
+    second: Cube
+  - first:
+      1: 100016
+    second: Elbow.L
+  - first:
+      1: 100018
+    second: Elbow.R
+  - first:
+      1: 100020
+    second: Foot.L
+  - first:
+      1: 100022
+    second: Foot.R
+  - first:
+      1: 100024
+    second: Foot_IK.L
+  - first:
+      1: 100026
+    second: Foot_IK.R
+  - first:
+      1: 100028
+    second: Hand.L
+  - first:
+      1: 100030
+    second: Hand.R
+  - first:
+      1: 100032
+    second: Head
+  - first:
+      1: 100034
+    second: Knee.L
+  - first:
+      1: 100036
+    second: Knee.R
+  - first:
+      1: 100038
+    second: Leg.L
+  - first:
+      1: 100040
+    second: Leg.R
+  - first:
+      1: 100042
+    second: Neck
+  - first:
+      1: 100044
+    second: //RootNode
+  - first:
+      1: 100046
+    second: Stomach
+  - first:
+      1: 100048
+    second: UpperArm.L
+  - first:
+      1: 100050
+    second: UpperArm.R
+  - first:
+      1: 100052
+    second: UpperLeg.L
+  - first:
+      1: 100054
+    second: UpperLeg.R
+  - first:
+      4: 400000
+    second: Arm.L
+  - first:
+      4: 400002
+    second: Arm.R
+  - first:
+      4: 400004
+    second: Arm_IK.L
+  - first:
+      4: 400006
+    second: Arm_IK.R
+  - first:
+      4: 400008
+    second: Armature
+  - first:
+      4: 400010
+    second: Chest
+  - first:
+      4: 400012
+    second: Control
+  - first:
+      4: 400014
+    second: Cube
+  - first:
+      4: 400016
+    second: Elbow.L
+  - first:
+      4: 400018
+    second: Elbow.R
+  - first:
+      4: 400020
+    second: Foot.L
+  - first:
+      4: 400022
+    second: Foot.R
+  - first:
+      4: 400024
+    second: Foot_IK.L
+  - first:
+      4: 400026
+    second: Foot_IK.R
+  - first:
+      4: 400028
+    second: Hand.L
+  - first:
+      4: 400030
+    second: Hand.R
+  - first:
+      4: 400032
+    second: Head
+  - first:
+      4: 400034
+    second: Knee.L
+  - first:
+      4: 400036
+    second: Knee.R
+  - first:
+      4: 400038
+    second: Leg.L
+  - first:
+      4: 400040
+    second: Leg.R
+  - first:
+      4: 400042
+    second: Neck
+  - first:
+      4: 400044
+    second: //RootNode
+  - first:
+      4: 400046
+    second: Stomach
+  - first:
+      4: 400048
+    second: UpperArm.L
+  - first:
+      4: 400050
+    second: UpperArm.R
+  - first:
+      4: 400052
+    second: UpperLeg.L
+  - first:
+      4: 400054
+    second: UpperLeg.R
+  - first:
+      21: 2100000
+    second: Material
+  - first:
+      43: 4300000
+    second: Cube
+  - first:
+      74: 7400000
+    second: Idle_Base
+  - first:
+      74: 7400002
+    second: Run_2
+  - first:
+      74: 7400004
+    second: Idle_BackStretch
+  - first:
+      74: 7400006
+    second: Idle_HeadScratch
+  - first:
+      74: 7400008
+    second: Run_2Left
+  - first:
+      74: 7400010
+    second: Run_2Back
+  - first:
+      74: 7400012
+    second: Run_2Right
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Cube
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: 03be798aa29862f48a19d2892a463acf, type: 2}
+    second: {fileID: 2100000, guid: c0fa950b97c486c4eb817adc9e99ee9a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -106,6 +240,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_Base
       takeName: Idle_Base
+      internalID: 7400000
       firstFrame: 0
       lastFrame: 60
       wrapMode: 0
@@ -134,6 +269,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run_2
       takeName: Run_2
+      internalID: 7400002
       firstFrame: 0
       lastFrame: 37
       wrapMode: 0
@@ -162,6 +298,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_BackStretch
       takeName: Idle_BackStretch
+      internalID: 7400004
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
@@ -190,6 +327,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_HeadScratch
       takeName: Idle_HeadScratch
+      internalID: 7400006
       firstFrame: 0
       lastFrame: 60
       wrapMode: 0
@@ -218,6 +356,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run_2Left
       takeName: Run_2
+      internalID: 7400008
       firstFrame: 0
       lastFrame: 37
       wrapMode: 0
@@ -246,6 +385,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run_2Back
       takeName: Run_2
+      internalID: 7400010
       firstFrame: 0
       lastFrame: 37
       wrapMode: 0
@@ -274,6 +414,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run_2Right
       takeName: Run_2
+      internalID: 7400012
       firstFrame: 0
       lastFrame: 37
       wrapMode: 0
@@ -305,6 +446,7 @@ ModelImporter:
     globalScale: 10
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -312,27 +454,32 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.099999994
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Stomach
       humanName: Hips
@@ -610,8 +757,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 10
     rootMotionBoneName: Control
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

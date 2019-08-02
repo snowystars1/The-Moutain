@@ -1,71 +1,197 @@
 fileFormatVersion: 2
 guid: 2b51a4a309d5b254782f3f8e8a0b7b51
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Arm.L
-    100002: Arm.R
-    100004: Arm_IK.L
-    100006: Arm_IK.R
-    100008: Armature
-    100010: Body
-    100012: Chest
-    100014: Control
-    100016: Elbow.L
-    100018: Elbow.R
-    100020: Foot.L
-    100022: Foot.R
-    100024: Foot_IK.L
-    100026: Foot_IK.R
-    100028: Hand.L
-    100030: Hand.R
-    100032: Head
-    100034: Knee.L
-    100036: Knee.R
-    100038: Leg.L
-    100040: Leg.R
-    100042: Neck
-    100044: //RootNode
-    100046: Stomach
-    100048: UpperArm.L
-    100050: UpperArm.R
-    100052: UpperLeg.L
-    100054: UpperLeg.R
-    400000: Arm.L
-    400002: Arm.R
-    400004: Arm_IK.L
-    400006: Arm_IK.R
-    400008: Armature
-    400010: Body
-    400012: Chest
-    400014: Control
-    400016: Elbow.L
-    400018: Elbow.R
-    400020: Foot.L
-    400022: Foot.R
-    400024: Foot_IK.L
-    400026: Foot_IK.R
-    400028: Hand.L
-    400030: Hand.R
-    400032: Head
-    400034: Knee.L
-    400036: Knee.R
-    400038: Leg.L
-    400040: Leg.R
-    400042: Neck
-    400044: //RootNode
-    400046: Stomach
-    400048: UpperArm.L
-    400050: UpperArm.R
-    400052: UpperLeg.L
-    400054: UpperLeg.R
-    2100000: BodyMaterial
-    4300000: Body
-    7400000: Jump2_Initial
-    7400002: Jump2_Hold
-    7400004: Jump2_Falling
-    9500000: //RootNode
-    13700000: Body
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Arm.L
+  - first:
+      1: 100002
+    second: Arm.R
+  - first:
+      1: 100004
+    second: Arm_IK.L
+  - first:
+      1: 100006
+    second: Arm_IK.R
+  - first:
+      1: 100008
+    second: Armature
+  - first:
+      1: 100010
+    second: Body
+  - first:
+      1: 100012
+    second: Chest
+  - first:
+      1: 100014
+    second: Control
+  - first:
+      1: 100016
+    second: Elbow.L
+  - first:
+      1: 100018
+    second: Elbow.R
+  - first:
+      1: 100020
+    second: Foot.L
+  - first:
+      1: 100022
+    second: Foot.R
+  - first:
+      1: 100024
+    second: Foot_IK.L
+  - first:
+      1: 100026
+    second: Foot_IK.R
+  - first:
+      1: 100028
+    second: Hand.L
+  - first:
+      1: 100030
+    second: Hand.R
+  - first:
+      1: 100032
+    second: Head
+  - first:
+      1: 100034
+    second: Knee.L
+  - first:
+      1: 100036
+    second: Knee.R
+  - first:
+      1: 100038
+    second: Leg.L
+  - first:
+      1: 100040
+    second: Leg.R
+  - first:
+      1: 100042
+    second: Neck
+  - first:
+      1: 100044
+    second: //RootNode
+  - first:
+      1: 100046
+    second: Stomach
+  - first:
+      1: 100048
+    second: UpperArm.L
+  - first:
+      1: 100050
+    second: UpperArm.R
+  - first:
+      1: 100052
+    second: UpperLeg.L
+  - first:
+      1: 100054
+    second: UpperLeg.R
+  - first:
+      4: 400000
+    second: Arm.L
+  - first:
+      4: 400002
+    second: Arm.R
+  - first:
+      4: 400004
+    second: Arm_IK.L
+  - first:
+      4: 400006
+    second: Arm_IK.R
+  - first:
+      4: 400008
+    second: Armature
+  - first:
+      4: 400010
+    second: Body
+  - first:
+      4: 400012
+    second: Chest
+  - first:
+      4: 400014
+    second: Control
+  - first:
+      4: 400016
+    second: Elbow.L
+  - first:
+      4: 400018
+    second: Elbow.R
+  - first:
+      4: 400020
+    second: Foot.L
+  - first:
+      4: 400022
+    second: Foot.R
+  - first:
+      4: 400024
+    second: Foot_IK.L
+  - first:
+      4: 400026
+    second: Foot_IK.R
+  - first:
+      4: 400028
+    second: Hand.L
+  - first:
+      4: 400030
+    second: Hand.R
+  - first:
+      4: 400032
+    second: Head
+  - first:
+      4: 400034
+    second: Knee.L
+  - first:
+      4: 400036
+    second: Knee.R
+  - first:
+      4: 400038
+    second: Leg.L
+  - first:
+      4: 400040
+    second: Leg.R
+  - first:
+      4: 400042
+    second: Neck
+  - first:
+      4: 400044
+    second: //RootNode
+  - first:
+      4: 400046
+    second: Stomach
+  - first:
+      4: 400048
+    second: UpperArm.L
+  - first:
+      4: 400050
+    second: UpperArm.R
+  - first:
+      4: 400052
+    second: UpperLeg.L
+  - first:
+      4: 400054
+    second: UpperLeg.R
+  - first:
+      21: 2100000
+    second: BodyMaterial
+  - first:
+      43: 4300000
+    second: Body
+  - first:
+      74: 7400000
+    second: Jump2_Initial
+  - first:
+      74: 7400002
+    second: Jump2_Hold
+  - first:
+      74: 7400004
+    second: Jump2_Falling
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Body
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -97,6 +223,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump2_Initial
       takeName: Jump2_Initial
+      internalID: 7400000
       firstFrame: 0
       lastFrame: 27
       wrapMode: 0
@@ -132,6 +259,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump2_Hold
       takeName: Jump2_Hold
+      internalID: 7400002
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -160,11 +288,12 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump2_Falling
       takeName: Jump2_Falling
+      internalID: 7400004
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0.44
+      level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
@@ -174,9 +303,9 @@ ModelImporter:
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -191,6 +320,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -198,27 +328,32 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Stomach
       humanName: Hips
@@ -496,8 +631,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

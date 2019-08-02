@@ -1957,6 +1957,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51b7b6afaaa1494ab8cbb8895e96ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerInputX: 0
+  controllerInputY: 0
+  playerAnim: {fileID: 1018058386}
 --- !u!4 &1017880173
 Transform:
   m_ObjectHideFlags: 0
@@ -2241,6 +2244,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1923243839968208, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
       propertyPath: main
@@ -2249,7 +2256,22 @@ PrefabInstance:
     - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
       propertyPath: jumpHeight
-      value: 6
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: maxDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: airForce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114619787930237212, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
