@@ -4,32 +4,38 @@ using UnityEngine;
 
 public class PlayerPhysics : MonoBehaviour {
 
+    //References
     public Animator playerAnim;
     public Animator gliderAnim;
+    private AnimatorStateInfo currentBaseState;
     public CapsuleCollider playerCollider;
     public Rigidbody playerRb;
     public Camera main;
     public static Vector3 groundNormal;
 
+    //Jumping
     public float jumpHeight = 15f;
     public float jumpForwardPush = 3f;
 
-    private AnimatorStateInfo currentBaseState;
+    //Movement/Speed
+    public static bool airAttackForce = false;//Public so it can be accessed by BattleCombos script (ComboEvents)
+    public float airAttackMovementSpeed = 3f;
+
+    //Ground Check
+    private int layerMask = 1 << 9;//This makes the onGround raycast only collide with ground
+    public float sphereCastShotDistance = .49f;
+    public float sphereCastRadius = .17f;
+
+    //Stopwatch
+    [SerializeField]
+    private int revTimeSeconds = 5;
+    public static ReversePositionData posData;
 
     public struct ReversePositionData
     {
         public Vector3[] reversePositions;//3.25 seconds of data (To account for inclusivity we have to make it one datasize bigger)
         public int count;
     }
-    public static ReversePositionData posData;
-    [SerializeField]
-    private int revTimeSeconds = 5;
-
-    private int layerMask = 1 << 9;//This makes the onGround raycast only collide with ground
-
-
-    public float sphereCastShotDistance = .49f;
-    public float sphereCastRadius = .17f;
 
     void Start ()
     {
@@ -40,11 +46,45 @@ public class PlayerPhysics : MonoBehaviour {
 
     void FixedUpdate ()
     {
-        //Every fixedUpdate loop, a raycast is shot down to keep track of when the character walks off a cliff or something.
+        playerRb.useGravity = playerAnim.GetBool(HashTable.gravityParam);//Gravity is dictated by our animator parameter
 
+        if (airAttackForce)
+        {
+
+            playerRb.velocity = Vector3.zero;//Cut off all forces
+            if (MouseOrbitImproved.targetTrans != null)
+            {
+                airAttackMovementSpeed = Mathf.Clamp(MouseOrbitImproved.targetDir.magnitude, 0.0f, 3.0f);
+                playerRb.AddForce(MouseOrbitImproved.targetDir.normalized * airAttackMovementSpeed, ForceMode.Impulse);//This will push the player toward the target at variable speed (less force applied if he is closer to target) NOT BALANCED
+                playerRb.AddForce(-MouseOrbitImproved.targetDir.normalized * 1f, ForceMode.Force);
+            }
+            else
+            {
+                playerRb.AddForce(transform.forward.normalized * 3f, ForceMode.Impulse);//This will push the character forward when there is nothing targeted (when performing an air combo)
+
+            }
+            airAttackForce = false;
+
+        }
+
+        //This was originally in an update loop (Might cause problems later who knows)
+        playerAnim.SetFloat(HashTable.jumpBlendParam, playerRb.velocity.y);
+
+        OnGroundCheck();
+        //Air attack forces
+        //When the player attacks in the air, we set drag to 1 to slow them down over time. This is to reset drag.
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.jumpState && playerRb.drag != 0)
+            playerRb.drag = 0;
+    }
+
+    void OnGroundCheck()
+    {
+        //Fires SphereCast down to ground to scan if we've hit ground or not
         RaycastHit hit;
         if (Physics.SphereCast(playerCollider.center + this.transform.position, sphereCastRadius, Vector3.down, out hit, sphereCastShotDistance, layerMask))
         {
+            if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState)
+                GameManagerScript.instance.inputManager.GlideCancel();
             playerAnim.SetBool(HashTable.onGroundParam, true);
             //groundNormal = hit.normal;
         }
@@ -53,14 +93,6 @@ public class PlayerPhysics : MonoBehaviour {
             playerAnim.SetBool(HashTable.onGroundParam, false);
             //groundNormal = Vector3.up;
         }
-
-        ////GLIDE FORCES
-        //if(playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState)
-        //{
-        //}
-        //if((playerAnim.GetAnimatorTransitionInfo(0).fullPathHash == HashTable.glideToJump) || (playerAnim.GetAnimatorTransitionInfo(0).fullPathHash == HashTable.glideToMotion))
-        //{
-        //}
     }
 
     public float airForce = 4f;
@@ -78,10 +110,14 @@ public class PlayerPhysics : MonoBehaviour {
         }
     }
 
-    public void GliderMotion(float controllerInputX, float controllerInputY)
+    public void GliderInitiation()
     {
         gliderAnim.SetBool(HashTable.glideGliderParam, true);
         playerRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;//Release the Y constraint so he can rotate in the air
+    }
+
+    public void GliderMotion(float controllerInputX, float controllerInputY)
+    {
 
         playerRb.velocity = new Vector3(playerRb.velocity.x, playerRb.velocity.y / 1.05f, playerRb.velocity.z);//This makes the character fall slower
         playerRb.AddRelativeForce(Vector3.forward * controllerInputY * 10);//This pushes him forward/back

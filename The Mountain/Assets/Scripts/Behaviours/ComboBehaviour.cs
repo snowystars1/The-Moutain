@@ -11,7 +11,7 @@ public class ComboBehaviour : StateMachineBehaviour {
 
         if (!animator.GetBool(HashTable.onGroundParam))//This only activates when you are performing an air combo
         {
-            InputManager.airAttackForce = true;
+            PlayerPhysics.airAttackForce = true;
         }
         animator.SetBool(HashTable.ComboParam, false);
 	}

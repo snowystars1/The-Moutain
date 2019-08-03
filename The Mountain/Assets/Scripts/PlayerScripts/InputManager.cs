@@ -26,7 +26,6 @@ public class InputManager : MonoBehaviour
 
     public static Vector3 camForward;
     public static Vector3 newMove;
-    //private Vector3 targetDirection;
 
     //Movement/Speed
     public float grapplingHookForce = 5f;
@@ -35,16 +34,17 @@ public class InputManager : MonoBehaviour
     public float CameraMoveDistanceOnDPad = 1f;
     public int RevTimeMoveSpeed = 1;
 
-    //private float startTime;
+    //Stopwatch
+    private bool stopWatchParam;
     private ParticleSystem clockParticles;
 
-    public static bool airAttackForce = false;//Public so it can be accessed by BattleCombos script (ComboEvents)
+    //public static bool airAttackForce = false;//Public so it can be accessed by BattleCombos script (ComboEvents)
     //private bool firstJumpPush = true;//This is used to push the player up for the first time, then, as they hold down jump, this will block certain elements of the jump "if". Reset when the player touches the ground. 
 
     //private float playerHeight;
 
-    private float controllerInputX;
-    private float controllerInputY;
+    //private float controllerInputX;
+    //private float controllerInputY;
 
     //GrapplingHookCharacterController hookController;
     //PlayerPhysics playerPhys;
@@ -83,6 +83,14 @@ public class InputManager : MonoBehaviour
         EventManager.GlideCancel += GlideCancel;
         EventManager.DodgeRoll += DodgeRoll;
         EventManager.GroundAttacks += GroundAttack;
+        EventManager.AirAttacks += AirAttack;
+        EventManager.CycleItemsForward += CycleItemsForward;
+        EventManager.CycleItemsBackward += CycleItemsBackward;
+        EventManager.ZoomIn += ZoomIn;
+        EventManager.ZoomOut += ZoomOut;
+        EventManager.ChooseItem += ChooseItem;
+        EventManager.CameraTargetMode += CameraTargetMode;
+
     }
 
     void OnDisable()
@@ -93,7 +101,14 @@ public class InputManager : MonoBehaviour
         EventManager.Glide -= Glide;
         EventManager.GlideCancel -= GlideCancel;
         EventManager.DodgeRoll -= DodgeRoll;
-        EventManager.GroundAttacks += GroundAttack;
+        EventManager.GroundAttacks -= GroundAttack;
+        EventManager.AirAttacks -= AirAttack;
+        EventManager.CycleItemsForward -= CycleItemsForward;
+        EventManager.CycleItemsBackward -= CycleItemsBackward;
+        EventManager.ZoomIn -= ZoomIn;
+        EventManager.ZoomOut -= ZoomOut;
+        EventManager.ChooseItem -= ChooseItem;
+        EventManager.CameraTargetMode -= CameraTargetMode;
     }
 
     void Start()
@@ -115,196 +130,35 @@ public class InputManager : MonoBehaviour
         InvokeRepeating("AddBattleTimer", 1f, 1f);
     }
 
-    void FixedUpdate()
-    {
-        playerRb.useGravity = playerAnim.GetBool(HashTable.gravityParam);//Gravity is dictated by our animator parameter
+    //void FixedUpdate()
+    //{
+    //    playerRb.useGravity = playerAnim.GetBool(HashTable.gravityParam);//Gravity is dictated by our animator parameter
 
-        if (airAttackForce)
-        {
+    //    if (airAttackForce)
+    //    {
 
-            playerRb.velocity = Vector3.zero;//Cut off all forces
-            if (MouseOrbitImproved.targetTrans != null)
-            {
-                airAttackMovementSpeed = Mathf.Clamp(MouseOrbitImproved.targetDir.magnitude, 0.0f, 3.0f);
-                playerRb.AddForce(MouseOrbitImproved.targetDir.normalized * airAttackMovementSpeed, ForceMode.Impulse);//This will push the player toward the target at variable speed (less force applied if he is closer to target) NOT BALANCED
-                playerRb.AddForce(-MouseOrbitImproved.targetDir.normalized * 1f, ForceMode.Force);
-            }
-            else
-            {
-                playerRb.AddForce(transform.forward.normalized * 3f, ForceMode.Impulse);//This will push the character forward when there is nothing targeted (when performing an air combo)
+    //        playerRb.velocity = Vector3.zero;//Cut off all forces
+    //        if (MouseOrbitImproved.targetTrans != null)
+    //        {
+    //            airAttackMovementSpeed = Mathf.Clamp(MouseOrbitImproved.targetDir.magnitude, 0.0f, 3.0f);
+    //            playerRb.AddForce(MouseOrbitImproved.targetDir.normalized * airAttackMovementSpeed, ForceMode.Impulse);//This will push the player toward the target at variable speed (less force applied if he is closer to target) NOT BALANCED
+    //            playerRb.AddForce(-MouseOrbitImproved.targetDir.normalized * 1f, ForceMode.Force);
+    //        }
+    //        else
+    //        {
+    //            playerRb.AddForce(transform.forward.normalized * 3f, ForceMode.Impulse);//This will push the character forward when there is nothing targeted (when performing an air combo)
 
-            }
-            airAttackForce = false;
+    //        }
+    //        airAttackForce = false;
 
-        }
-
-
-    }
-
-    void Update()
-    {
-
-        playerAnim.SetFloat(HashTable.jumpBlendParam, playerRb.velocity.y);
-
-        //AIR ATTACKS
-        if (!playerAnim.GetBool(HashTable.onGroundParam) && (Input.GetMouseButtonDown(1) || Input.GetKeyDown("joystick button 2")))//This is for initiating an air combo
-        {//The 'X' Button
-            playerRb.drag = 1;
-            //This is set to true here because the player must always be able to press x and activite the combo parameter
-            playerAnim.SetBool(HashTable.ComboParam, true);//This is set to false in the comboBeahviour script in the function OnStateEnter().
-
-            if (playerAnim.GetInteger(HashTable.ComboCountParam) == 0)//This only works at the start of a combo
-            {
-                //ResetBattleTimer();
-                playerAnim.SetInteger(HashTable.ComboCountParam, 1);
-
-                ResetBattleTimer();//They have started an action so they should stay in the battle stance
-                playerAnim.SetBool(HashTable.gravityParam, false);//Turn off gravity while they are attacking in the air
-                airAttackForce = true;
-                swordCollider.enabled = true;
-                playerAnim.CrossFade(HashTable.airUpSwing1State, .25f);
-            }
-
-        }
-        //Air attack forces
-        if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.jumpState && playerRb.drag != 0)//If the character has come out of the air attack, no more drag
-            playerRb.drag = 0;
-
-        //DPAD EQUIPMENT SWAP
-        if (Mathf.Approximately(Input.GetAxis("DPadX"), 1f) && !isAxisDown)//FIX THIS SHIT
-        {
-            isAxisDown = true;
-            Debug.Log("asdfa");
-            itemArray[currentItem].itemObj.SetActive(false);//Disable the current object
-            if (currentItem == itemArray.Length - 1)//Go to the next item
-            {
-                currentItem = 0;//Effectively added
-            }
-            else
-            {
-                currentItem++;
-            }
-            while (itemArray[currentItem].unlocked == false)
-            {
-                currentItem++;//This will skip over items we have yet to unlock.
-                if (currentItem == itemArray.Length - 1)//Avoid IndexOutOfBounds exception.
-                {
-                    currentItem = 0;
-                }
-            }
-            itemArray[currentItem].itemObj.SetActive(true);//Enable the new object
-        }
-        if (Mathf.Approximately(Input.GetAxis("DPadX"), -1f) && !isAxisDown)
-        {
-            isAxisDown = true;
-            itemArray[currentItem].itemObj.SetActive(false);
-            if (currentItem == 0)//Go to the next item
-            {
-                currentItem = itemArray.Length - 1;//Effectively added
-            }
-            else
-            {
-                currentItem--;
-            }
-            while (itemArray[currentItem].unlocked == false)
-            {
-                currentItem--;//This will skip over items we have yet to unlock.
-                if (currentItem == itemArray.Length - 1)//Avoid IndexOutOfBounds exception.
-                {
-                    currentItem = 0;
-                }
-            }
-            itemArray[currentItem].itemObj.SetActive(true);
-        }
-        if (Mathf.Approximately(Input.GetAxis("DPadX"), 0f))
-        {
-            isAxisDown = false;
-        }
-
-        //DPAD CAMERA ZOOM (Y-AXIS)
-        if (Mathf.Approximately(Input.GetAxis("DPadY"), 1f))
-        {//DPAD Up and Down
-            MouseOrbitImproved.distance -= CameraMoveDistanceOnDPad;//The addition and subtraction of these two if statements are swapped for game "feel" purposes
-            Mathf.Lerp(MouseOrbitImproved.distance, MouseOrbitImproved.distance - CameraMoveDistanceOnDPad, .2f);
-        }
-        if (Mathf.Approximately(Input.GetAxis("DPadY"), -1f))
-        {
-            MouseOrbitImproved.distance += CameraMoveDistanceOnDPad;
-        }
-
-        //TARGET CAMERA MODE
-        if (Input.GetKeyDown("joystick button 5"))
-        {//The Rightbumper Button
-            if (MouseOrbitImproved.targetMode)
-            {
-                Debug.Log("TargetMode Off");
-                MouseOrbitImproved.targetMode = false;
-            }
-            else
-            {
-                Debug.Log("TargetMode On");
-                MouseOrbitImproved.targetMode = true;
-            }
-        }
-
-        switch (currentItem)
-        {
-            //GRAPPLING HOOK
-            case 0:
-                if (Input.GetKeyDown("joystick button 4") && !playerAnim.GetBool(HashTable.grapplingParam))
-                {//The LeftBumper button
-                 //DO SOME ANIMATION CALL
-                    playerAnim.SetBool(HashTable.grapplingParam, true);//WE HAVE TWO ACTIVATE BOOLEANS, ONE CALLED GrapplingHookCharacterController.GrapplingHookMode which activates when the grapple hits a target, and another called HashTable.grapplingParam which activates when you press the grapple button
-                    GameManagerScript.instance.hookController.FireGrappleHook();
-
-                }
-                else
-                {
-                    if (Input.GetKeyDown("joystick button 4") && playerAnim.GetBool(HashTable.grapplingParam))//This is to remove the grappling hook
-                    {
-                        GameManagerScript.instance.hookController.DestroyGrappleHook();//This is done to reduce having multiple instances of the same script in a scene.
-                        playerAnim.SetBool(HashTable.grapplingParam, false);
-                        GrapplingHookCharacterController.GrapplingHookMode = false;//This will already be false if the hook hasn't hit anything, it the hook has made contact, it will will be true, therefore this line will actually do something.
-                        if (playerAnim.GetBool(HashTable.onGroundParam))
-                        {
-                            playerAnim.applyRootMotion = true;//This is turned on here and in IdleBehaviour, when the character is flying through the air or being controlled by forces other than the animator, this should be off.
-                        }
-                    }
-                }
-                break;
-
-            //POCKET WATCH
-            case 1:
-                if (Input.GetKey("joystick button 4"))
-                {
-                    playerAnim.enabled = false;
-                    clockParticles.Play(true);
-                    playerModel.enabled = false;
-                    playerClothes.enabled = false;
-                    swordModel.enabled = false;
-                    gliderModel.enabled = false;
-                    gauntletModel.enabled = false;
-                    scarfModel.enabled = false;
-                    Vector3 toReversePos = PlayerPhysics.posData.reversePositions[(PlayerPhysics.posData.count + 1) % 13] - transform.position;
-                    playerRb.velocity = toReversePos * RevTimeMoveSpeed;
-                }
-                if (Input.GetKeyUp("joystick button 4"))
-                {
-                    playerAnim.enabled = true;
-                    playerModel.enabled = true;
-                    playerClothes.enabled = true;
-                    swordModel.enabled = true;
-                    gliderModel.enabled = true;
-                    gauntletModel.enabled = true;
-                    scarfModel.enabled = true;
-                    clockParticles.Stop();
-
-                }
-                break;
-        }
+    //    }
 
 
-    }
+    //}
+
+    //void Update()
+    //{
+    //}
 
 
     void LeftStick(float controllerInputX, float controllerInputY)
@@ -368,9 +222,10 @@ public class InputManager : MonoBehaviour
     {
         playerAnim.CrossFadeInFixedTime(HashTable.glideState, .5f);
         playerAnim.SetBool(HashTable.glidingParam, true);
+        GameManagerScript.instance.playerPhys.GliderInitiation();
     }
 
-    void GlideCancel()
+    public void GlideCancel()
     {
         GameManagerScript.instance.playerPhys.GliderCancel();
         playerAnim.SetBool(HashTable.glidingParam, false);
@@ -380,9 +235,6 @@ public class InputManager : MonoBehaviour
     {
         playerAnim.SetTrigger(HashTable.dodgeParam);
     }
-
-
-
 
     void GroundAttack()
     {
@@ -396,6 +248,163 @@ public class InputManager : MonoBehaviour
             swordCollider.enabled = true;
             playerAnim.SetInteger(HashTable.ComboCountParam, 1);
             playerAnim.CrossFade(HashTable.swordSwing2State, .25f);
+        }
+    }
+
+    void AirAttack()
+    {
+        playerRb.drag = 1;
+        //This is set to true here because the player must always be able to press x and activite the combo parameter
+        playerAnim.SetBool(HashTable.ComboParam, true);//This is set to false in the comboBeahviour script in the function OnStateEnter().
+
+        if (playerAnim.GetInteger(HashTable.ComboCountParam) == 0)//This only works at the start of a combo
+        {
+            //ResetBattleTimer();
+            playerAnim.SetInteger(HashTable.ComboCountParam, 1);
+
+            ResetBattleTimer();//They have started an action so they should stay in the battle stance
+            playerAnim.SetBool(HashTable.gravityParam, false);//Turn off gravity while they are attacking in the air
+            PlayerPhysics.airAttackForce = true;
+            swordCollider.enabled = true;
+            playerAnim.CrossFade(HashTable.airUpSwing1State, .25f);
+        }
+    }
+
+    void CycleItemsForward()
+    {
+        itemArray[currentItem].itemObj.SetActive(false);//Disable the current object
+        if (currentItem == itemArray.Length - 1)//Go to the next item
+        {
+            currentItem = 0;//Effectively added
+        }
+        else
+        {
+            currentItem++;
+        }
+        while (itemArray[currentItem].unlocked == false)
+        {
+            currentItem++;//This will skip over items we have yet to unlock.
+            if (currentItem == itemArray.Length - 1)//Avoid IndexOutOfBounds exception.
+            {
+                currentItem = 0;
+            }
+        }
+        itemArray[currentItem].itemObj.SetActive(true);//Enable the new object
+    }
+
+    void CycleItemsBackward()
+    {
+        itemArray[currentItem].itemObj.SetActive(false);
+        if (currentItem == 0)//Go to the next item
+        {
+            currentItem = itemArray.Length - 1;//Effectively added
+        }
+        else
+        {
+            currentItem--;
+        }
+        while (itemArray[currentItem].unlocked == false)
+        {
+            currentItem--;//This will skip over items we have yet to unlock.
+            if (currentItem == itemArray.Length - 1)//Avoid IndexOutOfBounds exception.
+            {
+                currentItem = 0;
+            }
+        }
+        itemArray[currentItem].itemObj.SetActive(true);
+    }
+
+    void ZoomIn()
+    {
+        MouseOrbitImproved.distance -= CameraMoveDistanceOnDPad;//The addition and subtraction of these two if statements are swapped for game "feel" purposes
+        Mathf.Lerp(MouseOrbitImproved.distance, MouseOrbitImproved.distance - CameraMoveDistanceOnDPad, .2f);
+    }
+
+    void ZoomOut()
+    {
+        MouseOrbitImproved.distance += CameraMoveDistanceOnDPad;
+    }
+
+    void ChooseItem()
+    {
+        switch (currentItem)
+        {
+            //GRAPPLING HOOK
+            case 0:
+                if (!playerAnim.GetBool(HashTable.grapplingParam))
+                {//The LeftBumper button
+                 //DO SOME ANIMATION CALL
+                 //WE HAVE TWO ACTIVATE BOOLEANS, ONE CALLED GrapplingHookCharacterController.GrapplingHookMode which activates when the grapple hits a target, and another called HashTable.grapplingParam which activates when you press the grapple button
+                    playerAnim.SetBool(HashTable.grapplingParam, true);
+                    GameManagerScript.instance.hookController.FireGrappleHook();
+
+                }
+                else
+                {
+                    if (playerAnim.GetBool(HashTable.grapplingParam))//This is to remove the grappling hook
+                    {
+                        //This is done to reduce having multiple instances of the same script in a scene.
+                        GameManagerScript.instance.hookController.DestroyGrappleHook();
+                        playerAnim.SetBool(HashTable.grapplingParam, false);
+                        //This will already be false if the hook hasn't hit anything, it the hook has made contact, it will will be true, therefore this line will actually do something.
+                        GrapplingHookCharacterController.GrapplingHookMode = false;
+                        if (playerAnim.GetBool(HashTable.onGroundParam))
+                        {
+                            //This is turned on here and in IdleBehaviour, when the character is flying through the air or being controlled by forces other than the animator, this should be off.
+                            playerAnim.applyRootMotion = true;
+                        }
+                    }
+                }
+                break;
+
+            //POCKET WATCH
+            case 1:
+                if (!stopWatchParam)
+                {
+                    stopWatchParam = true;
+                    playerAnim.enabled = false;
+                    clockParticles.Play(true);
+                    playerModel.enabled = false;
+                    playerClothes.enabled = false;
+                    swordModel.enabled = false;
+                    gliderModel.enabled = false;
+                    gauntletModel.enabled = false;
+                    scarfModel.enabled = false;
+                    Vector3 toReversePos = PlayerPhysics.posData.reversePositions[(PlayerPhysics.posData.count + 1) % 13] - transform.position;
+                    playerRb.velocity = toReversePos * RevTimeMoveSpeed;
+                    break;
+                }
+                if (stopWatchParam)
+                {
+                    stopWatchParam = false;
+                    playerAnim.enabled = true;
+                    playerModel.enabled = true;
+                    playerClothes.enabled = true;
+                    swordModel.enabled = true;
+                    gliderModel.enabled = true;
+                    gauntletModel.enabled = true;
+                    scarfModel.enabled = true;
+                    clockParticles.Stop();
+
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void CameraTargetMode()
+    {
+        if (MouseOrbitImproved.targetMode)
+        {
+            Debug.Log("TargetMode Off");
+            MouseOrbitImproved.targetMode = false;
+        }
+        else
+        {
+            Debug.Log("TargetMode On");
+            MouseOrbitImproved.targetMode = true;
         }
     }
 

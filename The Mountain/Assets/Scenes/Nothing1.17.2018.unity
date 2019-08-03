@@ -1957,8 +1957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51b7b6afaaa1494ab8cbb8895e96ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInputX: 0
-  controllerInputY: 0
   playerAnim: {fileID: 1018058386}
 --- !u!4 &1017880173
 Transform:
@@ -3429,7 +3427,7 @@ PrefabInstance:
     - target: {fileID: 839185068147172180, guid: 7954152d120626b408b1cc45e95f09f3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 839185068147172176, guid: 7954152d120626b408b1cc45e95f09f3,
         type: 3}
