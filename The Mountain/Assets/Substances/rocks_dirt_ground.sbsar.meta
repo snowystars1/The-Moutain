@@ -1,29 +1,72 @@
 fileFormatVersion: 2
 guid: dfe88250bc353f342a7d96c2cb356a18
 ScriptedImporter:
-  fileIDToRecycleName:
-    100000: rocks_dirt_ground/rocks_dirt_ground
-    400000: rocks_dirt_ground/rocks_dirt_ground/Transform
-    2100000: mat.rocks_dirt_ground
-    2100002: mat.rocks_dirt_ground_1
-    2300000: rocks_dirt_ground/rocks_dirt_ground/MeshRenderer
-    2800000: rocks_dirt_ground_Base Color
-    2800002: rocks_dirt_ground_Normal
-    2800004: rocks_dirt_ground_Metallic
-    2800006: rocks_dirt_ground_height
-    2800008: rocks_dirt_ground_ambientOcclusion
-    2800010: rocks_dirt_ground_1_Base Color
-    2800012: rocks_dirt_ground_1_Normal
-    2800014: rocks_dirt_ground_1_Metallic
-    2800016: rocks_dirt_ground_1_height
-    2800018: rocks_dirt_ground_1_ambientOcclusion
-    3300000: rocks_dirt_ground/rocks_dirt_ground/MeshFilter
-    11400000: sbsar
-    11400002: graph0
-    11400004: graph1
-    13500000: rocks_dirt_ground/rocks_dirt_ground/SphereCollider
-    100100000: rocks_dirt_ground
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: rocks_dirt_ground/rocks_dirt_ground
+  - first:
+      4: 400000
+    second: rocks_dirt_ground/rocks_dirt_ground/Transform
+  - first:
+      21: 2100000
+    second: mat.rocks_dirt_ground
+  - first:
+      21: 2100002
+    second: mat.rocks_dirt_ground_1
+  - first:
+      23: 2300000
+    second: rocks_dirt_ground/rocks_dirt_ground/MeshRenderer
+  - first:
+      28: 2800000
+    second: rocks_dirt_ground_Base Color
+  - first:
+      28: 2800002
+    second: rocks_dirt_ground_Normal
+  - first:
+      28: 2800004
+    second: rocks_dirt_ground_Metallic
+  - first:
+      28: 2800006
+    second: rocks_dirt_ground_height
+  - first:
+      28: 2800008
+    second: rocks_dirt_ground_ambientOcclusion
+  - first:
+      28: 2800010
+    second: rocks_dirt_ground_1_Base Color
+  - first:
+      28: 2800012
+    second: rocks_dirt_ground_1_Normal
+  - first:
+      28: 2800014
+    second: rocks_dirt_ground_1_Metallic
+  - first:
+      28: 2800016
+    second: rocks_dirt_ground_1_height
+  - first:
+      28: 2800018
+    second: rocks_dirt_ground_1_ambientOcclusion
+  - first:
+      33: 3300000
+    second: rocks_dirt_ground/rocks_dirt_ground/MeshFilter
+  - first:
+      114: 11400000
+    second: sbsar
+  - first:
+      114: 11400002
+    second: graph0
+  - first:
+      114: 11400004
+    second: graph1
+  - first:
+      135: 13500000
+    second: rocks_dirt_ground/rocks_dirt_ground/SphereCollider
+  - first:
+      1001: 100100000
+    second: rocks_dirt_ground
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -33,7 +76,8 @@ ScriptedImporter:
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://rocks_dirt_ground\" label=\"\" >\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://rocks_dirt_ground\" label=\"\" >\n  <presetinput
+      identifier=\"puddles\" uid=\"2953822014\" type=\"0\" value=\"0\" />\n </sbspreset>\n"
     shaderName: Standard
     outputNames: Base Color,Normal,Metallic,height,ambientOcclusion
     texturePackingList:
@@ -153,3 +197,65 @@ ScriptedImporter:
       textureFormat: 0
       loadBehavior: 0
     material: {fileID: 2100002, guid: dfe88250bc353f342a7d96c2cb356a18, type: 3}
+  - graphLabel: rocks_dirt_ground_2
+    graphDescIndex: 0
+    generateAllOutputs: 0
+    generateMipMaps: 1
+    preset: " <sbspreset pkgurl=\"pkg://rocks_dirt_ground\" label=\"\" >\n  <presetinput
+      identifier=\"puddles\" uid=\"2953822014\" type=\"0\" value=\"0\" />\n </sbspreset>\n"
+    shaderName: Standard
+    outputNames: Base Color,Normal,Metallic,height,ambientOcclusion
+    texturePackingList:
+    - outputName: Base Color
+      alphaSource: Base Color
+    - outputName: Normal
+      alphaSource: Normal
+    - outputName: Roughness
+      alphaSource: Roughness
+    - outputName: Metallic
+      alphaSource: Smoothness
+    - outputName: height
+      alphaSource: height
+    - outputName: ambientOcclusion
+      alphaSource: ambientOcclusion
+    colorSpaceList:
+    - outputName: Base Color
+      bLinear: 0
+    - outputName: Normal
+      bLinear: 1
+    - outputName: Roughness
+      bLinear: 1
+    - outputName: Metallic
+      bLinear: 1
+    - outputName: height
+      bLinear: 1
+    - outputName: ambientOcclusion
+      bLinear: 1
+    inputTextureMap: []
+    targetSettingList:
+    - label: Default
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: Standalone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    - label: iPhone
+      bOverride: 0
+      bLockRatio: 1
+      bHighQuality: 0
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadBehavior: 0
+    material: {fileID: 8001009283946251272, guid: dfe88250bc353f342a7d96c2cb356a18,
+      type: 3}

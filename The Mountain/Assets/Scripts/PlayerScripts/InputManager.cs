@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    bool isAxisDown = false;
+    //bool isAxisDown = false;
 
     Animator playerAnim;
     Animator gliderAnim;
@@ -117,8 +117,6 @@ public class InputManager : MonoBehaviour
         itemArray[0] = new item(GrapplingHookPicture, true);
         itemArray[1] = new item(PocketWatchPicture, true);
 
-
-
         swordCollider = playerSword.GetComponent<CapsuleCollider>();
         //playerPhys = GetComponent<PlayerPhysics>();
         clockParticles = GetComponent<ParticleSystem>();
@@ -129,37 +127,6 @@ public class InputManager : MonoBehaviour
         playerAnim.SetBool(HashTable.gravityParam, true);
         InvokeRepeating("AddBattleTimer", 1f, 1f);
     }
-
-    //void FixedUpdate()
-    //{
-    //    playerRb.useGravity = playerAnim.GetBool(HashTable.gravityParam);//Gravity is dictated by our animator parameter
-
-    //    if (airAttackForce)
-    //    {
-
-    //        playerRb.velocity = Vector3.zero;//Cut off all forces
-    //        if (MouseOrbitImproved.targetTrans != null)
-    //        {
-    //            airAttackMovementSpeed = Mathf.Clamp(MouseOrbitImproved.targetDir.magnitude, 0.0f, 3.0f);
-    //            playerRb.AddForce(MouseOrbitImproved.targetDir.normalized * airAttackMovementSpeed, ForceMode.Impulse);//This will push the player toward the target at variable speed (less force applied if he is closer to target) NOT BALANCED
-    //            playerRb.AddForce(-MouseOrbitImproved.targetDir.normalized * 1f, ForceMode.Force);
-    //        }
-    //        else
-    //        {
-    //            playerRb.AddForce(transform.forward.normalized * 3f, ForceMode.Impulse);//This will push the character forward when there is nothing targeted (when performing an air combo)
-
-    //        }
-    //        airAttackForce = false;
-
-    //    }
-
-
-    //}
-
-    //void Update()
-    //{
-    //}
-
 
     void LeftStick(float controllerInputX, float controllerInputY)
     {
@@ -197,7 +164,7 @@ public class InputManager : MonoBehaviour
 
         if (playerAnim.GetCurrentAnimatorStateInfo(0).fullPathHash == HashTable.glideState)
         {
-            GameManagerScript.instance.playerPhys.GliderMotion(controllerInputX, controllerInputY);
+            GameManagerScript.instance.playerPhys.GliderMotion(controllerInputX, controllerInputY, newMove);
         }
     }
 

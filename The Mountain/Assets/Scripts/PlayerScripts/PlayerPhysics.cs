@@ -116,13 +116,15 @@ public class PlayerPhysics : MonoBehaviour {
         playerRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;//Release the Y constraint so he can rotate in the air
     }
 
-    public void GliderMotion(float controllerInputX, float controllerInputY)
+    public void GliderMotion(float controllerInputX, float controllerInputY, Vector3 newMove)
     {
 
-        playerRb.velocity = new Vector3(playerRb.velocity.x, playerRb.velocity.y / 1.05f, playerRb.velocity.z);//This makes the character fall slower
-        playerRb.AddRelativeForce(Vector3.forward * controllerInputY * 10);//This pushes him forward/back
-        playerRb.AddRelativeForce(Vector3.right * controllerInputX * 8);// This pushes him right/left
-        playerRb.angularVelocity = new Vector3(0f, controllerInputX, 0f);//This turns him in midair
+        playerRb.velocity = new Vector3(playerRb.velocity.x, playerRb.velocity.y / 1.03f, playerRb.velocity.z);//This makes the character fall slower
+        //playerRb.AddRelativeForce(Vector3.forward * controllerInputY * 10);//This pushes him forward/back
+        //playerRb.AddRelativeForce(Vector3.right * controllerInputX * 8);// This pushes him right/left
+        playerRb.AddForce(transform.forward * controllerInputY * 10, ForceMode.Force);
+        playerRb.AddForce(transform.right * controllerInputX * 8, ForceMode.Force);
+        playerRb.angularVelocity = new Vector3(0f, controllerInputX*.99f, 0f);//This turns him in midair
         playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, 30f);
     }
 
