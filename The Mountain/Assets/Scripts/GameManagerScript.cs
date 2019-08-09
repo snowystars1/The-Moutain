@@ -6,10 +6,17 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour {
 
     public static GameManagerScript instance = null;
+
+    [Header("References")]
     public GrapplingHookCharacterController hookController;
     public PlayerPhysics playerPhys;
     public InputManager inputManager;
     public GrapplingHook grapplingHook;
+
+    //With this we can abuse the singleton pattern and only ever grab our references once.
+    public GameObject playerCharacter;
+    public Animator playerAnim;
+    public Rigidbody playerRb;
 
 	// Use this for initialization
 	void Awake () {

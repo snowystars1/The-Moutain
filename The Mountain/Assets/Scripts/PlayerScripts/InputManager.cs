@@ -128,7 +128,7 @@ public class InputManager : MonoBehaviour
         InvokeRepeating("AddBattleTimer", 1f, 1f);
     }
 
-    void LeftStick(float controllerInputX, float controllerInputY)
+    public void LeftStick(float controllerInputX, float controllerInputY)
     {
         //This block of code gives us direction of movement and turn parameter for the animator fields.
         camForward = Vector3.Scale(CamTrans.forward, new Vector3(1f, 0, 1f)).normalized;

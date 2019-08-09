@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
     public static event VoidNoParams ZoomOut;
     public static event VoidNoParams ChooseItem;
     public static event VoidNoParams CameraTargetMode;
+    public static event VoidNoParams Interact;
 
     public delegate void VoidInputs(float x, float y);
     public static event VoidInputs Movement;
@@ -57,6 +58,7 @@ public class EventManager : MonoBehaviour
 
     void Update()
     {
+
         controllerInputY = Input.GetAxis("Vertical");
         controllerInputX = Input.GetAxis("Horizontal");
         DPadX = Input.GetAxis("DPadX");
@@ -67,8 +69,6 @@ public class EventManager : MonoBehaviour
 
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
         //LEFT STICK MOVEMENT
         if ((controllerInputX > .1f || controllerInputX < -.1f) || (controllerInputY > .1f || controllerInputY < -.1f))
@@ -94,6 +94,12 @@ public class EventManager : MonoBehaviour
                 else
                     Jump?.Invoke();
             }
+        }
+
+        //INTERACT
+        if(Input.GetKeyDown("joystick button 3"))
+        {
+            Interact?.Invoke();
         }
 
         //DODGE ROLL

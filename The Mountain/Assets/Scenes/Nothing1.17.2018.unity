@@ -2202,6 +2202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReRiggedGrayCharacter7-15-2018
       objectReference: {fileID: 0}
+    - target: {fileID: 1923243839968208, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114160086231666680, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
       propertyPath: main
@@ -2232,7 +2236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4353383481160938, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.985
       objectReference: {fileID: 0}
     - target: {fileID: 4353383481160938, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2271,6 +2275,31 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1372442097}
+    - target: {fileID: 137716295639617190, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.05487287
+      objectReference: {fileID: 0}
+    - target: {fileID: 137716295639617190, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.004340087
+      objectReference: {fileID: 0}
+    - target: {fileID: 137716295639617190, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.06733024
+      objectReference: {fileID: 0}
+    - target: {fileID: 137716295639617190, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.22261451
+      objectReference: {fileID: 0}
+    - target: {fileID: 137716295639617190, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.22373283
+      objectReference: {fileID: 0}
     - target: {fileID: 114925762006695928, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
       propertyPath: healthBar
@@ -2281,6 +2310,15 @@ PrefabInstance:
       propertyPath: heatlhParticles
       value: 
       objectReference: {fileID: 654242427}
+    - target: {fileID: 120821225408103990, guid: 9d75e13b38f71eb44a25c4d92cf68886,
+        type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053917285812716, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 136551195642313082, guid: 9d75e13b38f71eb44a25c4d92cf68886,
         type: 3}
       propertyPath: m_Material

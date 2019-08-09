@@ -6,7 +6,7 @@ public class JumpBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        animator.SetBool(HashTable.gravityParam, true);	//When transitioning from AirCombos back to jump, I want to turn gravity back on
+        //animator.SetBool(HashTable.gravityParam, true);	//When transitioning from AirCombos back to jump, I want to turn gravity back on
         animator.SetInteger(HashTable.ComboCountParam, 0);//Reset the ComboCount because we fell out of combo
 	}
 

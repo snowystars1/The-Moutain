@@ -8,6 +8,9 @@ public class BattleCombos : MonoBehaviour
     private Animator playerAnim;
     public GameObject playerSword;
     private CapsuleCollider playerSwordCollider;
+
+    private bool continueCombo=false;
+
     // Use this for initialization
     void Start()
     {
@@ -45,12 +48,14 @@ public class BattleCombos : MonoBehaviour
 
     void AirUpSwing1ComboEvent()
     {
+        continueCombo = false;
         if (playerAnim.GetBool(HashTable.ComboParam))
         {
             playerSwordCollider.enabled = true;
             playerAnim.SetInteger(HashTable.ComboCountParam, 2);
             playerAnim.CrossFade(HashTable.airDownSwing1State, .25f);
             playerAnim.SetBool(HashTable.gravityParam, false);
+            continueCombo = true;
         }
         else
         {
@@ -60,16 +65,28 @@ public class BattleCombos : MonoBehaviour
 
     void AirDownSwing1ComboEvent()
     {
+        continueCombo = false;
         if (playerAnim.GetBool(HashTable.ComboParam))
         {
             playerSwordCollider.enabled = true;
             playerAnim.SetInteger(HashTable.ComboCountParam, 3);
             playerAnim.CrossFade(HashTable.airSlashFinisher1State, .25f);
             playerAnim.SetBool(HashTable.gravityParam, false);
+            continueCombo = true;
         }
         else
         {
             playerSwordCollider.enabled = false;
         }
+    }
+
+    void EnableGravity()
+    {
+        if (!continueCombo)
+        {
+            GameManagerScript.instance.playerAnim.SetBool(HashTable.gravityParam, true);
+        }
+        continueCombo = false;
+
     }
 }
