@@ -225,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4353383481160938, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4353383481160938, guid: 9d75e13b38f71eb44a25c4d92cf68886, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -965,7 +965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &229396703
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,7 +1831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &666810148
 Transform:
   m_ObjectHideFlags: 0
@@ -4793,6 +4793,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainMountainRocks
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965202797991716597, guid: 2206048cfe7def34f949632ab047fde5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3251199055320093926, guid: 2206048cfe7def34f949632ab047fde5,
         type: 3}
